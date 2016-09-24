@@ -33,6 +33,25 @@
           <time-date date-format="MMMM Do YYYY" time-format="h:mm a"></time-date>
         </template>
       </demo-snippet>
+      <demo-snippet>
+        <template>
+          <style>
+            #styled #date-time-container {
+              display: flex;
+              flex-direction: column;
+            }
+            #styled #time {
+              font-size: 36px;
+              margin: auto;
+              order: -1;
+            }
+            #styled #date {
+              margin: auto;
+            }
+          </style>
+          <time-date date-format="ddd, MMM Do YYYY" time-format="h:mm a" id='styled'></time-date>
+        </template>
+      </demo-snippet>
     </div>
 
   </body>
