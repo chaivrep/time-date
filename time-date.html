@@ -1,0 +1,73 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../moment-js/moment-js.html">
+<!--
+`time-date`
+Display a digital clock and/or current date
+
+@demo demo/index.html 
+-->
+
+<dom-module id="time-date">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <span id='date-time-container'>
+      <span id='date'>[[_date]]</span>
+      <span id='time'>[[_time]]</span>
+    </span>
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'time-date',
+
+      properties: {
+        /** The format for the date. */
+        dateFormat: {
+          type: String,
+          value: "MM-DD-YYYY",
+          notify: false,
+          reflectToAttribute: false,
+        },
+
+        /** The delay for updating the date/time in milliseconds. */
+        tickDelay: {
+          type: Number,
+          value: 500,
+          notify: false,
+          reflectToAttribute: false,
+        },
+
+        /** The format for the time. */
+        timeFormat: {
+          type: String,
+          value: "hh:mm:ss",
+          notify: false,
+          reflectToAttribute: false,
+        },
+        
+        /** The formatted date value. */
+        _date: String,
+
+        /** The formatted time value. */
+        _time: String,
+      },
+      /**
+      * Updates the date and time using the given format
+      */
+      _tick: function() {
+        var now = moment();
+        this._date = now.format(this.dateFormat);
+        this._time = now.format(this.timeFormat);
+        this.async(this._tick, this.tickDelay);
+      },
+      ready: function() {
+        this._tick();
+      },
+    });
+  </script>
+</dom-module>
